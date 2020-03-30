@@ -35,11 +35,12 @@ class BookParser:
     @property
     def rating(self):
         locator = BookLocators.RATING_LOCATOR
-        star_rating_tag = self.parent.select_one(locator)
-        classes = star_rating_tag.attrs['class']  #['star_rating','Three']
-        rating_classes = [r for r in classes if r != 'star_rating']
-        rating_number = BookParser.RATING.get(rating_classes[0], 0)
-        return rating_number
+        star_rating_element = self.parent.select_one(locator)
+        classes = star_rating_element.attrs['class']
+        rating_classes = filter(lambda x: x != 'star-rating', classes)
+        rating_class = next(rating_classes)
+        rating = BookParser.RATING.get(rating_class)
+        return rating
 
     @property
     def link(self):

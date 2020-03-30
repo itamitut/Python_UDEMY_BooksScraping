@@ -1,4 +1,4 @@
-import  requests
+import requests
 
 from pages.all_books_page import AllBooksPage
 
